@@ -1,4 +1,4 @@
-/*
+﻿/*
  *
  *  Bluetooth low-complexity, subband codec (SBC) library
  *
@@ -41,7 +41,6 @@
 #include "sbc_tables.h"
 
 #include "sbc.h"
-#include "sbc_private.h"
 #include "sbc_primitives.h"
 
 #define SBC_SYNCWORD	0x9C
@@ -70,6 +69,11 @@
 #define A2DP_ALLOCATION_SNR			(1 << 1)
 #define A2DP_ALLOCATION_LOUDNESS		(1 << 0)
 
+#ifdef 	_MSC_VER
+#pragma pack(push, 1)
+#endif // 	_MSC_VER
+
+
 #if __BYTE_ORDER == __LITTLE_ENDIAN
 
 struct a2dp_sbc {
@@ -80,7 +84,13 @@ struct a2dp_sbc {
 	uint8_t block_length:4;
 	uint8_t min_bitpool;
 	uint8_t max_bitpool;
-} __attribute__ ((packed));
+}
+#ifdef __GNUC__
+__attribute__((packed)) 
+#elif _MSC_VER
+#pragma pack(pop)
+#endif
+;
 
 #elif __BYTE_ORDER == __BIG_ENDIAN
 
@@ -92,7 +102,13 @@ struct a2dp_sbc {
 	uint8_t allocation_method:2;
 	uint8_t min_bitpool;
 	uint8_t max_bitpool;
-} __attribute__ ((packed));
+}
+#ifdef __GNUC__
+__GNUC__ __attribute__((packed));
+#elif _MSC_VER
+#pragma pack(pop)
+#endif
+;
 
 #else
 #error "Unknown byte order"

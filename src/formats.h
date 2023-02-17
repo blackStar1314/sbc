@@ -1,4 +1,4 @@
-/*
+﻿/*
  *
  *  Bluetooth low-complexity, subband codec (SBC) library
  *
@@ -21,7 +21,10 @@
  *
  */
 
+#ifndef WIN32 
 #include <byteswap.h>
+#endif // !WIN32 
+
 
 #if __BYTE_ORDER == __LITTLE_ENDIAN
 #define COMPOSE_ID(a,b,c,d)	((a) | ((b)<<8) | ((c)<<16) | ((d)<<24))

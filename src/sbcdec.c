@@ -1,4 +1,4 @@
-/*
+﻿/*
  *
  *  Bluetooth low-complexity, subband codec (SBC) decoder
  *
@@ -30,14 +30,18 @@
 #include <stdio.h>
 #include <errno.h>
 #include <fcntl.h>
+#ifdef WIN32
+#else
 #include <unistd.h>
+#include <getopt.h>
+#include <sys/ioctl.h>
+#include <sys/soundcard.h>
+#endif // WIN32
+
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-#include <getopt.h>
 #include <sys/stat.h>
-#include <sys/ioctl.h>
-#include <sys/soundcard.h>
 
 #include "sbc/sbc.h"
 #include "formats.h"

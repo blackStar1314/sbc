@@ -1,4 +1,4 @@
-/*
+﻿/*
  *
  *  Bluetooth low-complexity, subband codec (SBC) library
  *
@@ -22,4 +22,18 @@
  *
  */
 
+#ifdef WIN32 
+#ifdef SBC_DLL
+#ifdef SBC_API_EXPORT
+#define SBC_EXPORT __declspec(dllexport)
+#else
+#define SBC_EXPORT __declspec(dllimport)
+#endif // SBC_API_EXPORT
+
+#else
+#define SBC_EXPORT
+#endif
+#else
 #define SBC_EXPORT __attribute__ ((visibility("default")))
+#endif // WIN32
+
